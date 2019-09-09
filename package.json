@@ -6,7 +6,6 @@
     "types": "dist/index.d.js",
     "scripts": {
         "prettier": "prettier --write **/*.json src/*.ts src/*.tsx src/**/*.ts src/**/*.tsx",
-        "tsc": "tsc",
         "watch": "webpack-dev-server",
         "build": "tsc",
         "start": "npm-run-all demo:worker watch",

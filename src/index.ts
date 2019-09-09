@@ -35,11 +35,13 @@ export default function TutchCode(options: {
     text?: string;
     onSuccess?: (justs: Justification[]) => void;
     onError?: (errorMessage: string, loc: SourceLocation | null) => void;
+    onUpdate?: (text: string) => void;
 }) {
     const { url, host, codemirror } = options;
     const initialText = options.text || '';
     const onSuccess = options.onSuccess || (() => {});
     const onError = options.onError || (() => {});
+    const onUpdate = options.onUpdate || (() => {});
 
     let tutch: (text: string) => void;
     let value = initialText;
@@ -54,6 +56,7 @@ export default function TutchCode(options: {
             value = text;
             doc.getAllMarks().forEach(mark => mark.clear());
             tutch(text);
+            onUpdate(text);
         }
     });
 

@@ -12,11 +12,18 @@
 <script src="/main.js"></script>
 <script>
 window.addEventListener('load', () => {
+    const output = document.getElementById('output');
     Tutch({
         host: document.getElementById('host'),
         url: '/worker.js',
-        text: 'proof triv: T =\nbegin\nT\nend;',
         codemirror: CodeMirror,
+        text: 'proof triv: T =\nbegin\nT\nend;',
+        onSuccess: (justifications) => {
+            output.innerHTML = `${JSON.stringify(justifications, null, 2)}`
+        },
+        onError: (errorMessage, loc) => {
+            output.innerHTML = `Error at ${JSON.stringify(loc)}\n\n${errorMessage}`;
+        }
     });
 });
 </script>
@@ -26,5 +33,8 @@ window.addEventListener('load', () => {
 <body>
     <div id="host">
     </div>
+    <pre id="output">
+
+    </pre>
 </body>
 </html>
